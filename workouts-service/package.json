@@ -1,0 +1,24 @@
+{
+  "name": "colefitcorp-workouts-service",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --recursive test/api",
+    "dev": "cd src && npm dev",
+    "lint": "./node_modules/.bin/eslint **",
+    "start": "cd src && npm start",
+    "test": "mocha --recursive test/unit"
+  },
+  "devDependencies": {
+    "aws-sdk-mock": "^1.6.1",
+    "chai": "~3.5",
+    "eslint": "~3.19",
+    "istanbul": "^0.4.4",
+    "mocha": "^3.0.1",
+    "mongoose": "~4.9",
+    "nodemon": "latest",
+    "sinon": "~2.2",
+    "sinon-chai": "~2.10",
+    "supertest": "~3.0"
+  }
+}

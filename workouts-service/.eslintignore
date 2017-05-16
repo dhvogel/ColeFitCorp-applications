@@ -1,0 +1,7 @@
+src/app.js
+src/bin/www
+npm-debug.log
+package.json
+node_modules/
+src/public/js/
+Dockerfile
