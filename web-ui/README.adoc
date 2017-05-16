@@ -1,0 +1,20 @@
+== Usage (2 ways to build this):
+
+1) Build it into a docker container
+
+  $ cd ColeFitCorp-site
+  $ docker build -t <name of docker image> .
+  $ docker run -p 3000:<desired port to bind to> <name of docker image just built>
+
+Go to **localhost:<whatever port site was bound to>** to see the site.
+
+---
+
+2) Run it locally
+
+  $ cd ColeFitCorp-site
+  $ npm install
+  $ npm start
+
+Go to **localhost:3000** to see the site
+

@@ -1,0 +1,30 @@
+{
+  "name": "colefitcorp-site",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon ./bin/www",
+    "lint": "./node_modules/.bin/eslint **",
+    "start": "gulp styles && node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "bourbon": "~4.3",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "gulp": "~3.9",
+    "gulp-sass": "~3.1",
+    "jade": "~1.11.0",
+    "morgan": "~1.8.1",
+    "node-sass": "~4.5",
+    "node-neat": "~1.7",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "eslint": "~3.19",
+    "istanbul": "^0.4.4",
+    "mocha": "^3.0.1",
+    "nodemon": "latest"
+  }
+}

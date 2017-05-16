@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CF Corp.</title>
+    <link rel="stylesheet" href="styles/main.css" type="text/css">
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+      crossorigin="anonymous"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="js/_modal.js"></script>
+    <script type="text/javascript" src="js/_navbar.js"></script>
+    <script src="js/workouts.js"></script>
+  </head>
+  <body ng-app='root'>
+    <header class="navigation" role="banner">
+      <div class="navigation-wrapper">
+        <a href="../" class="logo">
+          <img src="assets/images/lifting-barbell.png" alt="Logo Image">
+        </a>
+        <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+        <nav role="navigation">
+          <ul id="js-navigation-menu" class="navigation-menu show">
+            <li class="nav-link"><a href="pricing">Pricing</a></li>
+            <li class="nav-link"><a href="testimonials">Testimonials</a></li>
+            <li class="nav-link"><a href="javascript:void(0)">Workouts</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class='article-layout'>
+      <div class='article-layout__hero'>
+        <h1 style="font-size:5em; text-align:center">Workouts</h1>
+
+        <div class="modal" style="text-align:center">
+          <label for="modal-1">
+            <div class="modal-trigger">Click for Modal</div>
+          </label>
+          <input class="modal-state" id="modal-1" type="checkbox" />
+          <div class="modal-fade-screen">
+            <div class="modal-inner">
+              <div class="modal-close" for="modal-1"></div>
+              <h1>Modal Title</h1>
+              <p class="modal-intro">Intro text lorem ipsum dolor sit ametm, quas, eaque facilis aliquid cupiditate tempora cumque ipsum accusantium illo modi commodi  minima.</p>
+              <p class="modal-content">Body text lorem ipsum dolor ipsum dolor sit sit possimus amet, consectetur adipisicing elit. Itaque, placeat, explicabo, veniam quos aperiam molestias eriam molestias molestiae suscipit ipsum enim quasi sit possimus quod atque nobis voluptas earum odit accusamus quibusdam. Body text lorem ipsum dolor ipsum dolor sit sit possimus amet.</p>
+            </div>
+          </div>
+        </div>
+
+        <div ng-controller='workouts'>
+          <div class="grid-items">
+            <a href="javascript:void(0)" class="grid-item" ng-repeat='workout in workouts'>
+              <h1>{{workout.title}}</h1>
+              <p>{{workout.author}}</p>
+              <p>{{workout.body}}</p>
+              <p>{{workout.date}}</p>
+            </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
