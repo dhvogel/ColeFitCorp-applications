@@ -16,6 +16,10 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('./public/styles'));
 });
 
+gulp.task('styles:watch', function () {
+  gulp.watch('./sass/**/*.scss', ['styles']);
+});
+
 gulp.task('default', function(){
     gulp.start('styles');
 });
