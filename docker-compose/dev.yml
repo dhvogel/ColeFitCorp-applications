@@ -1,0 +1,9 @@
+version: '2'
+services:
+  cfcorp-site:
+    build: ../web-ui
+    container_name: cfcorp-site
+    ports:
+     - "3000:3000"
+    volumes:
+     - ../web-ui:/src
