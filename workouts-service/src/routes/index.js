@@ -20,18 +20,24 @@ router.get('/workout', function(req, res) {
 });
 
 router.post('/workout', function(req, res) {
-  if (!('author' in req.body) || !('body' in req.body)
-        || !('date' in req.body) || !('title' in req.body)) {
-    res.status(500).json('Error writing data.');
-    return;
+  const workoutCandidate = req.body.Body;
+  const workoutCandidateLower = workoutCandidate.toLowerCase();
+  const keyword = '#cf';
+
+  if (!workoutCandidateLower.includes(keyword)) {
+    res.status(500).json('Error writing data. Text body does not include #cf keyword.');
   }
+
+  const workoutData = workoutCandidate.split('---');
+  const workoutTitle = workoutData[0].split('\n')[1];
+  const workoutBody = workoutData[1];
+  const workoutDate = new Date();
 
   const newWorkout = new Workout(
     {
-      author: req.body.author,
-      body: req.body.body,
-      date: req.body.date,
-      title: req.body.title
+      body: workoutBody,
+      date: workoutDate,
+      title: workoutTitle
     }
   );
   newWorkout.save(function(err) {
@@ -39,7 +45,14 @@ router.post('/workout', function(req, res) {
       res.status(500).json('Error writing data.');
       return;
     } else {
-      res.status(201).json('Success! Data written.');
+      res.status(201).json(
+        {
+          message: 'Success! Data written.',
+          body: workoutBody,
+          date: workoutDate,
+          title: workoutTitle
+        }
+      );
       return;
     }
   });

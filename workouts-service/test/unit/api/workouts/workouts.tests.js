@@ -54,9 +54,8 @@ describe('/workout', function() {
          expect(res.body).to.be.an('array');
          expect(res.body.length).to.be.above(0);
          expect(res.body[0]).to.be.an('object');
-         expect(res.body[0]).to.contain.all.keys(['author', 'date', 'title', 'body']);
+         expect(res.body[0]).to.contain.all.keys(['date', 'title', 'body']);
          expect(res.body[0].body).to.equal('a workout');
-         expect(res.body[0].author).to.equal('Dan Vogel');
          // I don't like this, need a better way to check date type
          expect(res.body[0].date).to.equal('monday');
          expect(res.body[0].title).to.equal('a title');
@@ -69,23 +68,27 @@ describe('/workout', function() {
 
   describe('POST /workout', () => {
 
-    it('responds with 201 status and success message', done => {
+    it('response with 201 status and success message', done => {
       request(server)
       .post('/workout')
-      .send({ author: 'Dan Vogel', body: 'a body', date: 'a date', title: 'a title'})
+      .send({ Body: '#CF\nDannywod\n---\n2x\n  10 push-ups '})
       .expect(201)
       .end(function(err, res) {
-        expect(res.body).to.equal('Success! Data written.');
+        expect(res.body.message).to.equal('Success! Data written.');
+        expect(res.body.title).to.equal('Dannywod');
+        expect(res.body.body).to.equal('\n2x\n  10 push-ups ');
+        expect(res.body.date).to.be.a('string');
         done();
       });
     });
 
-    it('responds with 500 status and error message when fields not in req', done => {
+    it('responds with 500 status and error message when #cf not in req', done => {
       request(server)
       .post('/workout')
+      .send({ Body: 'Dannywod\n---\n2x\n  10 push-ups'})
       .expect(500)
       .end(function(err, res) {
-        expect(res.body).to.equal('Error writing data.');
+        expect(res.body).to.equal('Error writing data. Text body does not include #cf keyword.');
         done();
       });
     });

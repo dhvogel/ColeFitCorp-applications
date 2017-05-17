@@ -47,8 +47,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-if (app.get('env') == 'development') {
+if (app.get('env') == 'docker_dev') {
   mongoose.connect('mongodb://mongo:27017');
+} else if (app.get('env') == 'development') {
+  mongoose.connect('mongodb://localhost:27017')
 } else if (app.get('env') == 'production') {
   mongoose.connect(mongoURI);
 }

@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "dev": "nodemon ./bin/www",
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "test": "mocha --recursive test/unit"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -16,8 +17,5 @@
     "mongoose": "~4.9",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
-  },
-  "devDependencies": {
-    "ngrok": "~2.2"
   }
 }
