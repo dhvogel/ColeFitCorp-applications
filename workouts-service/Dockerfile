@@ -1,10 +1,17 @@
-FROM node:4
+FROM node:5
 
-ADD ./src/. /app
+RUN mkdir /src
 
-RUN cd /app; \
-    npm install
+RUN npm install nodemon -g
 
-EXPOSE 3000
+WORKDIR /src
 
-CMD sleep 2 && node /app/bin/www
+ADD ./src/package.json /src/package.json
+
+RUN npm install
+
+EXPOSE 9000
+
+CMD ls && npm run dev
+
+

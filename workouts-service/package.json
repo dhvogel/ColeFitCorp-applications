@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --recursive test/api",
-    "dev": "cd src && npm dev",
+    "dev": "cd src && npm run dev",
     "lint": "./node_modules/.bin/eslint **",
     "start": "cd src && npm start",
     "test": "mocha --recursive test/unit"

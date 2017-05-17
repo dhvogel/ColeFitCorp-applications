@@ -5,5 +5,21 @@ services:
     container_name: cfcorp-site
     ports:
      - "3000:3000"
+    links:
+     - cfcorp-workouts-service:cfcorp-workouts-service
     volumes:
      - ../web-ui:/src
+  cfcorp-workouts-service:
+    build: ../workouts-service
+    container_name: cfcorp-workouts-service
+    ports: 
+     - "9000:9000"
+    links:
+     - mongo
+    volumes:
+     - ../workouts-service/src:/src
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+     - "27017:27017" 

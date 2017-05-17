@@ -48,8 +48,6 @@ app.use(function(err, req, res, next) {
 });
 
 if (app.get('env') == 'development') {
-  mongoose.connect('mongodb://localhost/workouts');
-} else if (app.get('env') == 'docker-dev') {
   mongoose.connect('mongodb://mongo:27017');
 } else if (app.get('env') == 'production') {
   mongoose.connect(mongoURI);
