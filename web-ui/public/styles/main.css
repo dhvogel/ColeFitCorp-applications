@@ -398,7 +398,7 @@ header.navigation {
   display: none; }
 
 .modal .modal-trigger {
-  padding: 0.8em 1em; }
+  padding: 0em 1em 2em 1em; }
 
 .modal .modal-fade-screen {
   position: fixed;
@@ -500,6 +500,16 @@ header.navigation {
 
 .modal-open {
   overflow: hidden; }
+
+#workout-body {
+  height: 10em;
+  padding-bottom: 7em; }
+
+input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], input:not([type]), textarea {
+  height: 30px; }
+
+input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="email"]:hover, input[type="month"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="time"]:hover, input[type="url"]:hover, input[type="week"]:hover, input:not([type]):hover, textarea:hover {
+  background: #D3D3D3; }
 
 * {
   font-family: 'viper'; }

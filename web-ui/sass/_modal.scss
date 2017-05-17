@@ -33,7 +33,7 @@
   }
 
   .modal-trigger {
-    padding: 0.8em 1em;
+    padding: 0em 1em 2em 1em;
   }
 
   .modal-fade-screen { // overlay
@@ -75,7 +75,7 @@
 
     &:hover::after,
     &:hover::before {
-      background: darken($modal-close-color, 10%);
+      background: darken($modal-close-color, 40%);
     }
 
     &::before {

@@ -1,0 +1,12 @@
+#workout-body {
+  height: 10em;
+  padding-bottom: 7em;
+}
+
+#{$all-text-inputs} {
+  height: 30px;
+}
+
+#{$all-text-inputs-hover} {
+  background: #D3D3D3;
+}
