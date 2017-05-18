@@ -232,16 +232,43 @@ header.navigation {
       display: table;
       width: 100%;
       table-layout: fixed; } }
-  .side-image .images-wrapper {
-    background: url("https:\a//raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png"), linear-gradient(#B5EBEB, #5DAC5D), no-repeat #B5EBEB scroll;
-    background-color: #B5EBEB;
+  .side-image #mike {
+    background: url("../assets/images/mike.jpeg");
     background-size: cover;
     border-bottom: 1px solid rgba(38, 74, 38, 0.2);
     display: block;
     min-height: 12em;
     padding: 3em; }
     @media screen and (min-width: 53.75em) {
-      .side-image .images-wrapper {
+      .side-image #mike {
+        display: table-cell;
+        width: 33.33333%;
+        background-position: bottom;
+        background-size: cover;
+        border-right: 1px solid rgba(38, 74, 38, 0.2); } }
+  .side-image #kevin {
+    background: url("../assets/images/kevin.jpeg");
+    background-size: cover;
+    border-bottom: 1px solid rgba(38, 74, 38, 0.2);
+    display: block;
+    min-height: 12em;
+    padding: 3em; }
+    @media screen and (min-width: 53.75em) {
+      .side-image #kevin {
+        display: table-cell;
+        width: 33.33333%;
+        background-position: bottom;
+        background-size: cover;
+        border-right: 1px solid rgba(38, 74, 38, 0.2); } }
+  .side-image #katie {
+    background: url("../assets/images/katie.jpeg");
+    background-size: cover;
+    border-bottom: 1px solid rgba(38, 74, 38, 0.2);
+    display: block;
+    min-height: 12em;
+    padding: 3em; }
+    @media screen and (min-width: 53.75em) {
+      .side-image #katie {
         display: table-cell;
         width: 33.33333%;
         background-position: bottom;

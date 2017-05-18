@@ -13,7 +13,7 @@ gulp.task('styles', function() {
         .pipe(sass({
             includePaths: ['styles'].concat(neat)
         }))
-        .pipe(gulp.dest('.src/public/styles'));
+        .pipe(gulp.dest('./public/styles'));
 });
 
 gulp.task('styles:watch', function () {

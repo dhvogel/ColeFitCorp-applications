@@ -16,12 +16,40 @@
     @include row(table);
   }
 
-  .images-wrapper {
-    background: url("https:
-//raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png"),
-                linear-gradient($side-image-background-top, $side-image-background-bottom),
-                no-repeat $side-image-background-top scroll;
-    background-color: $side-image-background-top;
+  #mike {
+    background: url("../assets/images/mike.jpeg");
+    background-size: cover;
+    border-bottom: $side-image-border;
+    display: block;
+    min-height: 12em;
+    padding: 3em;
+
+    @include media($large-screen) {
+      @include span-columns(4);
+      background-position: bottom;
+      background-size: cover;
+      border-right: $side-image-border;
+    }
+  }
+
+  #kevin {
+    background: url("../assets/images/kevin.jpeg");
+    background-size: cover;
+    border-bottom: $side-image-border;
+    display: block;
+    min-height: 12em;
+    padding: 3em;
+
+    @include media($large-screen) {
+      @include span-columns(4);
+      background-position: bottom;
+      background-size: cover;
+      border-right: $side-image-border;
+    }
+  }
+
+  #katie {
+    background: url("../assets/images/katie.jpeg");
     background-size: cover;
     border-bottom: $side-image-border;
     display: block;
