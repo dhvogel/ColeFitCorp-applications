@@ -10,6 +10,7 @@ angular.module('root', [])
 
     Workouts.get()
       .success(function(data) {
+        console.log('Workouts retrieved:', data);
         $scope.workouts = data;
       });
 }]);
