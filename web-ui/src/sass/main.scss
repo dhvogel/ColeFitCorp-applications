@@ -4,8 +4,21 @@
 @import 'hero_unit';
 @import 'side_image';
 @import 'grid_items';
-@import 'input';
+
+@font-face {
+   font-family: 'viper';
+   src: url("../assets/fonts/VIPESRG_.TTF") format("truetype");
+}
+
+@font-face {
+   font-family: 'impacted';
+   src: url("../assets/fonts/Impacted2.0.ttf") format("truetype");
+}
 
 * {
   font-family: 'viper'
+}
+
+#workout-font {
+  font-family: 'impacted'
 }

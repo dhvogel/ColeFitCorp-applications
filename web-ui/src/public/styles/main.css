@@ -5,10 +5,6 @@ html {
 *, *::after, *::before {
   box-sizing: inherit; }
 
-@font-face {
-  font-family: 'viper';
-  src: url("../assets/fonts/VIPESRG_.TTF") format("truetype"); }
-
 header.navigation {
   background-color: #333;
   border-bottom: 1px solid #1a1a1a;
@@ -311,17 +307,16 @@ header.navigation {
   border-top: 0;
   cursor: pointer;
   float: left;
-  height: 14em;
+  height: 20em;
   outline: none;
   overflow: hidden;
-  padding: 2em;
   text-align: center;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   width: 100%; }
   @media screen and (min-width: 53.75em) {
     .grid-items .grid-item {
-      width: 33.33333%; } }
+      width: 50%; } }
   .grid-items .grid-item:nth-child(1) {
     background-color: #6b83a6;
     box-shadow: inset 0 0 1px 2px #536a8b; }
@@ -384,14 +379,20 @@ header.navigation {
   height: 3em;
   margin: 0 auto 1em; }
 
-.grid-items .grid-item h1 {
-  color: white;
-  font-size: 1.3em;
+.grid-items .grid-item h5 {
+  margin-top: 0.2em;
+  font-family: 'impacted';
+  letter-spacing: 2px;
+  color: black;
+  font-size: 3em;
   margin-bottom: 0.4em; }
 
 .grid-items .grid-item p {
+  font-family: 'impacted';
+  letter-spacing: 2px;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.5em;
+  font-size: 1.8em;
   margin: auto; }
   @media screen and (min-width: 40em) {
     .grid-items .grid-item p {
@@ -399,7 +400,7 @@ header.navigation {
 
 @media screen and (min-width: 53.75em) {
   .grid-items .grid-item-big {
-    width: 66.66667%; } }
+    width: 100%; } }
 
 @media screen and (min-width: 40em) {
   .grid-items .grid-item-big p {
@@ -412,15 +413,16 @@ header.navigation {
   background-repeat: no-repeat;
   background-size: cover; }
 
-#workout-body {
-  height: 10em;
-  padding-bottom: 7em; }
+@font-face {
+  font-family: 'viper';
+  src: url("../assets/fonts/VIPESRG_.TTF") format("truetype"); }
 
-input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], input:not([type]), textarea {
-  height: 30px; }
-
-input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="email"]:hover, input[type="month"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="time"]:hover, input[type="url"]:hover, input[type="week"]:hover, input:not([type]):hover, textarea:hover {
-  background: #D3D3D3; }
+@font-face {
+  font-family: 'impacted';
+  src: url("../assets/fonts/Impacted2.0.ttf") format("truetype"); }
 
 * {
   font-family: 'viper'; }
+
+#workout-font {
+  font-family: 'impacted'; }

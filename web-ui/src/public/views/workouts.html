@@ -34,12 +34,12 @@
         <h1 style="font-size:5em; text-align:center">Workouts</h1>
 
         <div ng-controller='workouts'>
-          <div class="grid-items">
+          <div class="grid-items" id="workout-font">
             <a href="javascript:void(0)" class="grid-item" ng-repeat='workout in workouts'>
-              <h1>{{workout.title}}</h1>
-              <p>{{workout.author}}</p>
-              <p>{{workout.body}}</p>
-              <p>{{workout.date}}</p>
+              <h5 id="workout-font">{{workout.title}}</h5>
+              <p id="workout-font">{{workout.author}}</p>
+              <p id="workout-font">{{workout.body}}</p>
+              <p id="workout-font">{{workout.date}}</p>
             </a>
         </div>
       </div>

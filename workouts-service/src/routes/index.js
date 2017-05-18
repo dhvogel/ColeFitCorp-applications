@@ -31,7 +31,22 @@ router.post('/workout', function(req, res) {
   const workoutData = workoutCandidate.split('---');
   const workoutTitle = workoutData[0].split('\n')[1];
   const workoutBody = workoutData[1];
-  const workoutDate = new Date();
+
+  const formatDate = function(date) {
+      const monthNames = [
+        'January', 'February', 'March',
+        'April', 'May', 'June', 'July',
+        'August', 'September', 'October',
+        'November', 'December'
+      ];
+
+      const day = date.getDate();
+      const monthIndex = date.getMonth();
+
+      return `${day} ${monthNames[monthIndex]},${date.toLocaleString('en-US', {timeZone: 'America/New_York'}).split(',')[1]} EST`;
+  };
+
+  const workoutDate = formatDate(new Date());
 
   const newWorkout = new Workout(
     {
