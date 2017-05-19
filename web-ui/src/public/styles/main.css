@@ -307,7 +307,7 @@ header.navigation {
   border-top: 0;
   cursor: pointer;
   float: left;
-  height: 20em;
+  height: auto;
   outline: none;
   overflow: hidden;
   text-align: center;

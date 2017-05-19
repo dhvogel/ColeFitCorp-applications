@@ -30,7 +30,7 @@ router.post('/workout', function(req, res) {
 
   const workoutData = workoutCandidate.split('---');
   const workoutTitle = workoutData[0].split('\n')[1];
-  const workoutBody = workoutData[1];
+  const workoutBody = workoutData[1].substring(1);
 
   const formatDate = function(date) {
       const monthNames = [

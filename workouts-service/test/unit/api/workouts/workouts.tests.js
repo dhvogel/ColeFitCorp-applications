@@ -52,11 +52,10 @@ describe('/workout', function() {
       .expect(200)
       .end(function(err, res) {
          expect(res.body).to.be.an('array');
-         expect(res.body.length).to.be.above(0);
+         expect(res.body.length).to.equal(1);
          expect(res.body[0]).to.be.an('object');
          expect(res.body[0]).to.contain.all.keys(['date', 'title', 'body']);
          expect(res.body[0].body).to.equal('a workout');
-         // I don't like this, need a better way to check date type
          expect(res.body[0].date).to.equal('monday');
          expect(res.body[0].title).to.equal('a title');
          expect(mongoose.model.find).to.be.calledOnce;
@@ -76,7 +75,7 @@ describe('/workout', function() {
       .end(function(err, res) {
         expect(res.body.message).to.equal('Success! Data written.');
         expect(res.body.title).to.equal('Dannywod');
-        expect(res.body.body).to.equal('\n2x\n  10 push-ups ');
+        expect(res.body.body).to.equal('2x\n  10 push-ups ');
         expect(res.body.date).to.be.a('string');
         done();
       });
