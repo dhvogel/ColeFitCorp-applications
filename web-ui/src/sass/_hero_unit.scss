@@ -1,6 +1,5 @@
 .hero {
   $large-screen: 50em !default;
-  $font-family: 'viper';
   align-items: center;
   background: image-url("background-image.png");
   background-position: right;
@@ -18,15 +17,10 @@
   }
 
   .hero-content {
-    font-family: $font-family;
+    padding-top: 0.4em;
     max-width: 20em;
     text-align: center;
     font-size: 6em;
-    margin-left: 1em;
-
-    @include media($large-screen) {
-      text-align: left;
-    }
 
     .hero-slogan {
 

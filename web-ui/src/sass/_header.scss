@@ -38,9 +38,10 @@ header.navigation {
     max-height: $navigation-height;
     padding-left: $navigation-padding;
     padding-right: 2em;
+    padding-top: 0.2em;
 
     img {
-      max-height: $navigation-height;
+      max-height: $navigation-height + 2;
       padding: 0.8em 0;
     }
   }
@@ -123,9 +124,12 @@ header.navigation {
     }
 
     a {
+      padding-top: 0.1em;
       color: $navigation-color;
       display: inline-block;
       text-decoration: none;
+      letter-spacing: 3px;
+      font-size: 1.8em;
 
       @include media ($horizontal-bar-mode) {
         padding-right: 1em;

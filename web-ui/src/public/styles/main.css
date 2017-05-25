@@ -23,9 +23,10 @@ header.navigation {
     float: left;
     max-height: 60px;
     padding-left: 1em;
-    padding-right: 2em; }
+    padding-right: 2em;
+    padding-top: 0.2em; }
     header.navigation .logo img {
-      max-height: 60px;
+      max-height: 62px;
       padding: 0.8em 0; }
   header.navigation .navigation-menu-button {
     color: white;
@@ -80,9 +81,12 @@ header.navigation {
         text-decoration: none;
         width: auto; } }
     header.navigation ul li.nav-link a {
+      padding-top: 0.1em;
       color: white;
       display: inline-block;
-      text-decoration: none; }
+      text-decoration: none;
+      letter-spacing: 3px;
+      font-size: 1.8em; }
       @media screen and (min-width: 53.75em) {
         header.navigation ul li.nav-link a {
           padding-right: 1em; } }
@@ -203,14 +207,10 @@ header.navigation {
       background-size: cover;
       justify-content: flex-end; } }
   .hero .hero-content {
-    font-family: "viper";
+    padding-top: 0.4em;
     max-width: 20em;
     text-align: center;
-    font-size: 6em;
-    margin-left: 1em; }
-    @media screen and (min-width: 50em) {
-      .hero .hero-content {
-        text-align: left; } }
+    font-size: 6em; }
     .hero .hero-content .hero-slogan p {
       float: right;
       padding-right: 1em;
@@ -414,15 +414,16 @@ header.navigation {
   background-size: cover; }
 
 @font-face {
-  font-family: 'viper';
-  src: url("../assets/fonts/VIPESRG_.TTF") format("truetype"); }
-
-@font-face {
   font-family: 'impacted';
   src: url("../assets/fonts/Impacted2.0.ttf") format("truetype"); }
 
 * {
-  font-family: 'viper'; }
-
-#workout-font {
   font-family: 'impacted'; }
+
+h1.page-title {
+  font-size: 7em;
+  margin-top: 0.2em;
+  text-decoration: underline; }
+
+.row.testimonial {
+  text-align: left; }

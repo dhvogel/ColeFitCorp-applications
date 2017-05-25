@@ -7,12 +7,9 @@
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
       crossorigin="anonymous"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-    <script src="js/_modal.js"></script>
     <script type="text/javascript" src="js/_navbar.js"></script>
-    <script src="js/workouts.js"></script>
   </head>
-  <body ng-app='root'>
+  <body>
     <header class="navigation" role="banner">
       <div class="navigation-wrapper">
         <a href="../" class="logo">
@@ -23,8 +20,8 @@
           <ul id="js-navigation-menu" class="navigation-menu show">
             <li class="nav-link"><a href="pricing">Pricing</a></li>
             <li class="nav-link"><a href="testimonials">Testimonials</a></li>
-            <li class="nav-link"><a href="javascript:void(0)">Workouts</a></li>
-            <li class="nav-link"><a href="how-this-site-is-built">How this site is built</a></li>
+            <li class="nav-link"><a href="workouts">Workouts</a></li>
+            <li class="nav-link"><a href="javascript:void(0)">How this site is built</a></li>
           </ul>
         </nav>
       </div>
@@ -32,23 +29,12 @@
 
     <div class="container" style="text-align:center">
       <div class="row">
-        <h1 class="page-title">Workouts</h1>
+        <h1 class="page-title">How this site is built</h1>
       </div>
       <div class="row">
-        <div class='article-layout'>
-          <div ng-controller='workouts'>
-            <div class="grid-items" id="workout-font">
-              <a href="javascript:void(0)" class="grid-item" ng-repeat='workout in workouts'>
-                <h5 id="workout-font">{{workout.title}}</h5>
-                <p id="workout-font">{{workout.author}}</p>
-                <pre><p id="workout-font" style="text-align:left">{{workout.body}}</p></pre>
-                <p id="workout-font">{{workout.date}}</p>
-              </a>
-          </div>
-        </div>
+        Content
       </div>
     </div>
-
 
   </body>
 </html>
