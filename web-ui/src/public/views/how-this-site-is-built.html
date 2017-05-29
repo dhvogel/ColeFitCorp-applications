@@ -47,31 +47,83 @@
             <div class="blog-section-header">
               System Architecture
             </div>
-            On a high level, this web application runs on several servers owned
-            and operated by Amazon Web Services (AWS for short).
-            <br/>
-            This website can be broken up into three logical components. They
-            are:
-            <br/>
-            <ul>
-              <li><b>The User Interface</b>. This is the component you are looking
-                at right now. It supplies the static content of the site. Static
-                content can be thought of as content that doesn't change. It
-                is the same for every user who visits the site and does not have
-                to be computed in the background.
-              </li>
-              <li><b>The Workout Service</b>. This component operates
-                the colefitcorp.com/workouts page behind the scenes. At this point,
-                it is responsible for receiving submitted workouts and responding
-                to requests for these submitted workouts. However, this functionality
-                could be extended if I have the time and will to do so.
-              </li>
-              <li><b>The Database</b>. This is where the submited workouts are
-                stored. As it is currently the sole source of truth for the list
-                of workouts, it is imperative that the database be highly available
-                and reliable.
-              </li>
-            </ul>
+            <div class="row">
+              On a high level, the Cole Fit Corp web application runs on several
+              servers owned and operated by Amazon Web Services (AWS for short).
+            </div>
+            <div class="row">
+              This website can be broken up into three logical components. They
+              are:
+            </div>
+            <div class="row">
+              <ul>
+                <li><b>The User Interface</b>. This is the component you are looking
+                  at right now. It supplies the static content of the site. Static
+                  content can be thought of as content that doesn't change -- it
+                  is the same for every user who visits the site and does not have
+                  to be computed in the background.
+                </li>
+                <li><b>The Workout Service</b>. This component operates
+                  the colefitcorp.com/workouts page behind the scenes.
+                  It is currently responsible for receiving submitted workouts and responding
+                  to requests for these submitted workouts. However, this functionality
+                  could be extended if I have the time and will to do so.
+                </li>
+                <li><b>The Database</b>. This is where the submited workouts are
+                  stored. As it is currently the sole source of truth for the list
+                  of workouts, it is imperative that the database be highly available
+                  and reliable.
+                </li>
+              </ul>
+            </div>
+            <div class="row">
+              I have created a series of diagrams that aim to explain the interplay
+              of the three ColeFit Corp web application components.
+            </div>
+            <div class="row">
+              <div class="blog-subsection-header">
+                Diagram 1 - The three components
+              </div>
+            </div>
+            <div class="row">
+              <img src="../assets/images/cfcorp_architecture-1.png">
+            </div>
+            <div class="row">
+              Above are the three main site components I am talking about.
+            </div>
+            <div class="row">
+              <br/>
+              You'll see that the ColeFitCorp Web UI and the ColeFitCorp Workout
+              Service live in something called Docker Containers. What is a docker
+              container?
+              <br/>
+              <br/>
+              A docker container is a tool that:
+              <ul>
+                <li>
+                  <b>Isolates processes that are running on the same server.</b> This
+                  enables the cfcorp-web-ui and cfcorp-workout-service to just worry
+                  about "themselves" as opposed to worrying about "themselves and
+                  everything else on the server".
+                </li>
+                <br/>
+                <li>
+                  <b>Standardizes the environment where each application is run.</b>
+                  Environment standardization allows me to have confidence that whatever
+                  I built on my own computer will run as intended on any other computer.
+                  When I build an application on my computer, I am building it using
+                  my computer's operating environent. Now, when I have finished building
+                  and am ready to ship my product to a server, I am basically sending
+                  the code that I developed on my own computer (also called my "local")
+                  to a computer somewhere in the cloud. Without a containerization
+                  service such as Docker, there can be no promises made about how
+                  my application will run on a different computer. What Docker does is
+                  provide me with a "clean room" every time I want to run my application.
+                  While this may seem like a small feature, it can save me a lot of
+                  headaches. Especially when I have a product finished on my local
+                  and am eager to see it run in production!
+                </li>
+            </div>
           </div>
         </div>
       </div>

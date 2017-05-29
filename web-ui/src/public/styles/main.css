@@ -435,15 +435,26 @@ h1.page-title {
   .container.blog .row {
     font-size: 18px;
     font-family: 'Open Sans'; }
+    .container.blog .row img {
+      border: 1px solid black;
+      margin: 1em;
+      max-width: 75%;
+      height: auto; }
     .container.blog .row .blog-section {
       font-family: 'Open Sans';
       margin-top: 3em;
       font-weight: normal; }
       .container.blog .row .blog-section .blog-section-header {
         font-family: 'Open Sans';
-        font-size: 22px;
+        font-size: 32px;
         text-decoration: underline;
-        margin-bottom: 1em; }
+        margin-bottom: 0.5em; }
+      .container.blog .row .blog-section .blog-subsection-header {
+        font-family: 'Open Sans';
+        font-size: 24px;
+        text-decoration: underline;
+        margin-top: 1em;
+        margin-bottom: 0.5em; }
       .container.blog .row .blog-section ul li {
         font-family: 'Open Sans'; }
         .container.blog .row .blog-section ul li b {
