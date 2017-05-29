@@ -27,11 +27,33 @@ h1.page-title {
 
 .container.blog {
   text-align: left;
-  margin: 2em; 
+  margin: 2em;
 
   .row {
     font-size: 18px;
     font-family: 'Open Sans';
-    font-weight: bold;
+
+
+    .blog-section {
+      font-family: 'Open Sans';
+      margin-top: 3em;
+      font-weight: normal;
+
+      .blog-section-header {
+        font-family: 'Open Sans';
+        font-size: 22px;
+        text-decoration: underline;
+        margin-bottom: 1em;
+      }
+
+      ul {
+        li {
+          font-family: 'Open Sans';
+          b {
+            font-family: 'Open Sans';
+          }
+        }
+      }
+    }
   }
 }

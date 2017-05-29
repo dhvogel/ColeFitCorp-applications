@@ -434,5 +434,17 @@ h1.page-title {
   margin: 2em; }
   .container.blog .row {
     font-size: 18px;
-    font-family: 'Open Sans';
-    font-weight: bold; }
+    font-family: 'Open Sans'; }
+    .container.blog .row .blog-section {
+      font-family: 'Open Sans';
+      margin-top: 3em;
+      font-weight: normal; }
+      .container.blog .row .blog-section .blog-section-header {
+        font-family: 'Open Sans';
+        font-size: 22px;
+        text-decoration: underline;
+        margin-bottom: 1em; }
+      .container.blog .row .blog-section ul li {
+        font-family: 'Open Sans'; }
+        .container.blog .row .blog-section ul li b {
+          font-family: 'Open Sans'; }

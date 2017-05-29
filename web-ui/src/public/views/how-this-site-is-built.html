@@ -32,7 +32,7 @@
         <h1 class="page-title">How this site is built</h1>
       </div>
       <div class="container blog">
-        <div class="row">
+        <div class="row blog-section">
           Some visitors to ColeFitCorp.com may be interested in how this site has
           been built. On this page I aim to explain how the site works in addition
           to some key processes I followed when developing it.
@@ -41,6 +41,38 @@
           <br/>
 
           - Dan
+        </div>
+        <div class="row">
+          <div class="blog-section">
+            <div class="blog-section-header">
+              System Architecture
+            </div>
+            On a high level, this web application runs on several servers owned
+            and operated by Amazon Web Services (AWS for short).
+            <br/>
+            This website can be broken up into three logical components. They
+            are:
+            <br/>
+            <ul>
+              <li><b>The User Interface</b>. This is the component you are looking
+                at right now. It supplies the static content of the site. Static
+                content can be thought of as content that doesn't change. It
+                is the same for every user who visits the site and does not have
+                to be computed in the background.
+              </li>
+              <li><b>The Workout Service</b>. This component operates
+                the colefitcorp.com/workouts page behind the scenes. At this point,
+                it is responsible for receiving submitted workouts and responding
+                to requests for these submitted workouts. However, this functionality
+                could be extended if I have the time and will to do so.
+              </li>
+              <li><b>The Database</b>. This is where the submited workouts are
+                stored. As it is currently the sole source of truth for the list
+                of workouts, it is imperative that the database be highly available
+                and reliable.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
