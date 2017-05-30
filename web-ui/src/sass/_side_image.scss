@@ -1,4 +1,5 @@
 .side-image {
+  font-family: 'impacted';
   $base-line-height: 1.5em !default;
   $action-color: #477DCA !default;
   $dark-gray: #333 !default;
@@ -65,6 +66,7 @@
   }
 
   .side-image-content {
+    font-family: 'impacted';
     @include span-columns(12);
     padding: 1em 1em 4em 1em;
 

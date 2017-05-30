@@ -1,3 +1,8 @@
+@font-face {
+   font-family: 'impacted';
+   src: url("../assets/fonts/Impacted2.0.ttf") format("truetype");
+}
+
 @import 'bourbon';
 @import 'neat';
 @import 'header';
@@ -6,16 +11,8 @@
 @import 'grid_items';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
-@font-face {
-   font-family: 'impacted';
-   src: url("../assets/fonts/Impacted2.0.ttf") format("truetype");
-}
-
-* {
-  font-family: 'impacted'
-}
-
 h1.page-title {
+  font-family: 'impacted';
   font-size: 7em;
   margin-top: 0.2em;
   text-decoration: underline;
@@ -23,51 +20,4 @@ h1.page-title {
 
 .row.testimonial {
   text-align:left;
-}
-
-.container.blog {
-  text-align: left;
-  margin: 2em;
-
-  .row {
-    font-size: 18px;
-    font-family: 'Open Sans';
-
-    img {
-      border: 1px solid black;
-      margin: 1em;
-      max-width: 75%;
-      height: auto;
-    }
-
-    .blog-section {
-      font-family: 'Open Sans';
-      margin-top: 3em;
-      font-weight: normal;
-
-      .blog-section-header {
-        font-family: 'Open Sans';
-        font-size: 32px;
-        text-decoration: underline;
-        margin-bottom: 0.5em;
-      }
-
-      .blog-subsection-header {
-        font-family: 'Open Sans';
-        font-size: 24px;
-        text-decoration: underline;
-        margin-top: 1em;
-        margin-bottom: 0.5em;
-      }
-
-      ul {
-        li {
-          font-family: 'Open Sans';
-          b {
-            font-family: 'Open Sans';
-          }
-        }
-      }
-    }
-  }
 }

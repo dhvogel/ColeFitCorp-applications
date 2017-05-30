@@ -1,5 +1,9 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+@font-face {
+  font-family: 'impacted';
+  src: url("../assets/fonts/Impacted2.0.ttf") format("truetype"); }
+
 html {
   box-sizing: border-box; }
 
@@ -7,9 +11,9 @@ html {
   box-sizing: inherit; }
 
 header.navigation {
+  font-family: 'impacted';
   background-color: #333;
   border-bottom: 1px solid #1a1a1a;
-  font-family: 'viper';
   min-height: 60px;
   width: 100%;
   z-index: 999; }
@@ -194,6 +198,7 @@ header.navigation {
         float: right; } }
 
 .hero {
+  font-family: 'impacted';
   align-items: center;
   background: image-url("background-image.png");
   background-position: right;
@@ -222,6 +227,7 @@ header.navigation {
     margin: auto; }
 
 .side-image {
+  font-family: 'impacted';
   background: #F9F9F9;
   padding-top: 2em; }
   @media screen and (min-width: 53.75em) {
@@ -272,6 +278,7 @@ header.navigation {
         background-size: cover;
         border-right: 1px solid rgba(38, 74, 38, 0.2); } }
   .side-image .side-image-content {
+    font-family: 'impacted';
     display: table-cell;
     width: 100%;
     padding: 1em 1em 4em 1em; }
@@ -295,167 +302,125 @@ header.navigation {
       line-height: 1.5em;
       margin-bottom: 3em; }
 
-.grid-items::after {
-  clear: both;
-  content: "";
-  display: table; }
-
-.grid-items .grid-item {
-  background: #6b83a6;
-  border-bottom: 9px solid white;
-  border-left: 4.5px solid white;
-  border-right: 4.5px solid white;
-  border-top: 0;
-  cursor: pointer;
-  float: left;
-  height: auto;
-  outline: none;
-  overflow: hidden;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-  width: 100%; }
-  @media screen and (min-width: 53.75em) {
-    .grid-items .grid-item {
-      width: 50%; } }
-  .grid-items .grid-item:nth-child(1) {
-    background-color: #6b83a6;
-    box-shadow: inset 0 0 1px 2px #536a8b; }
-    .grid-items .grid-item:nth-child(1):focus, .grid-items .grid-item:nth-child(1):hover {
-      background-color: #536a8b;
-      background-position: top;
-      background-repeat: no-repeat;
-      background-size: cover; }
-  .grid-items .grid-item:nth-child(2) {
-    background-color: #3581A5;
-    box-shadow: inset 0 0 1px 2px #29637e; }
-    .grid-items .grid-item:nth-child(2):focus, .grid-items .grid-item:nth-child(2):hover {
-      background-color: #29637e;
-      background-position: top;
-      background-repeat: no-repeat;
-      background-size: cover; }
-  .grid-items .grid-item:nth-child(3) {
-    background-color: #5FBEBE;
-    box-shadow: inset 0 0 1px 2px #44a6a6; }
-    .grid-items .grid-item:nth-child(3):focus, .grid-items .grid-item:nth-child(3):hover {
-      background-color: #44a6a6;
-      background-position: top;
-      background-repeat: no-repeat;
-      background-size: cover; }
-  .grid-items .grid-item:nth-child(4) {
-    background-color: #98C79A;
-    box-shadow: inset 0 0 1px 2px #77b57a; }
-    .grid-items .grid-item:nth-child(4):focus, .grid-items .grid-item:nth-child(4):hover {
-      background-color: #77b57a;
-      background-position: top;
-      background-repeat: no-repeat;
-      background-size: cover; }
-  .grid-items .grid-item:nth-child(5) {
-    background-color: #A7A891;
-    box-shadow: inset 0 0 1px 2px #909175; }
-    .grid-items .grid-item:nth-child(5):focus, .grid-items .grid-item:nth-child(5):hover {
-      background-color: #909175;
-      background-position: top;
-      background-repeat: no-repeat;
-      background-size: cover; }
-  .grid-items .grid-item:nth-child(6) {
-    background-color: #BDCC97;
-    box-shadow: inset 0 0 1px 2px #a7bb75; }
-    .grid-items .grid-item:nth-child(6):focus, .grid-items .grid-item:nth-child(6):hover {
-      background-color: #a7bb75;
-      background-position: top;
-      background-repeat: no-repeat;
-      background-size: cover; }
-  .grid-items .grid-item:nth-child(7) {
-    background-color: #979EA0;
-    box-shadow: inset 0 0 1px 2px #7c8588; }
-    .grid-items .grid-item:nth-child(7):focus, .grid-items .grid-item:nth-child(7):hover {
-      background-color: #7c8588;
-      background-position: top;
-      background-repeat: no-repeat;
-      background-size: cover; }
-
-.grid-items .grid-item img {
-  display: block;
-  height: 3em;
-  margin: 0 auto 1em; }
-
-.grid-items .grid-item h5 {
-  margin-top: 0.2em;
-  font-family: 'impacted';
-  letter-spacing: 2px;
-  color: black;
-  font-size: 3em;
-  margin-bottom: 0.4em; }
-
-.grid-items .grid-item p {
-  font-family: 'impacted';
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.5em;
-  font-size: 1.8em;
-  margin: auto; }
-  @media screen and (min-width: 40em) {
-    .grid-items .grid-item p {
-      max-width: 70%; } }
-
-@media screen and (min-width: 53.75em) {
-  .grid-items .grid-item-big {
-    width: 100%; } }
-
-@media screen and (min-width: 40em) {
-  .grid-items .grid-item-big p {
-    max-width: 60%; } }
-
-.grid-items .grid-item-image {
-  background: url("https:\a//raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png");
-  background-color: #6b83a6;
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: cover; }
-
-@font-face {
-  font-family: 'impacted';
-  src: url("../assets/fonts/Impacted2.0.ttf") format("truetype"); }
-
-* {
+.grid-items {
   font-family: 'impacted'; }
+  .grid-items::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .grid-items .grid-item {
+    background: #6b83a6;
+    border-bottom: 9px solid white;
+    border-left: 4.5px solid white;
+    border-right: 4.5px solid white;
+    border-top: 0;
+    cursor: pointer;
+    float: left;
+    height: auto;
+    outline: none;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    width: 100%; }
+    @media screen and (min-width: 53.75em) {
+      .grid-items .grid-item {
+        width: 50%; } }
+    .grid-items .grid-item:nth-child(1) {
+      background-color: #6b83a6;
+      box-shadow: inset 0 0 1px 2px #536a8b; }
+      .grid-items .grid-item:nth-child(1):focus, .grid-items .grid-item:nth-child(1):hover {
+        background-color: #536a8b;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover; }
+    .grid-items .grid-item:nth-child(2) {
+      background-color: #3581A5;
+      box-shadow: inset 0 0 1px 2px #29637e; }
+      .grid-items .grid-item:nth-child(2):focus, .grid-items .grid-item:nth-child(2):hover {
+        background-color: #29637e;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover; }
+    .grid-items .grid-item:nth-child(3) {
+      background-color: #5FBEBE;
+      box-shadow: inset 0 0 1px 2px #44a6a6; }
+      .grid-items .grid-item:nth-child(3):focus, .grid-items .grid-item:nth-child(3):hover {
+        background-color: #44a6a6;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover; }
+    .grid-items .grid-item:nth-child(4) {
+      background-color: #98C79A;
+      box-shadow: inset 0 0 1px 2px #77b57a; }
+      .grid-items .grid-item:nth-child(4):focus, .grid-items .grid-item:nth-child(4):hover {
+        background-color: #77b57a;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover; }
+    .grid-items .grid-item:nth-child(5) {
+      background-color: #A7A891;
+      box-shadow: inset 0 0 1px 2px #909175; }
+      .grid-items .grid-item:nth-child(5):focus, .grid-items .grid-item:nth-child(5):hover {
+        background-color: #909175;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover; }
+    .grid-items .grid-item:nth-child(6) {
+      background-color: #BDCC97;
+      box-shadow: inset 0 0 1px 2px #a7bb75; }
+      .grid-items .grid-item:nth-child(6):focus, .grid-items .grid-item:nth-child(6):hover {
+        background-color: #a7bb75;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover; }
+    .grid-items .grid-item:nth-child(7) {
+      background-color: #979EA0;
+      box-shadow: inset 0 0 1px 2px #7c8588; }
+      .grid-items .grid-item:nth-child(7):focus, .grid-items .grid-item:nth-child(7):hover {
+        background-color: #7c8588;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover; }
+  .grid-items .grid-item img {
+    display: block;
+    height: 3em;
+    margin: 0 auto 1em; }
+  .grid-items .grid-item h5 {
+    margin-top: 0.2em;
+    font-family: 'impacted';
+    letter-spacing: 2px;
+    color: black;
+    font-size: 3em;
+    margin-bottom: 0.4em; }
+  .grid-items .grid-item p {
+    font-family: 'impacted';
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5em;
+    font-size: 1.8em;
+    margin: auto; }
+    @media screen and (min-width: 40em) {
+      .grid-items .grid-item p {
+        max-width: 70%; } }
+  @media screen and (min-width: 53.75em) {
+    .grid-items .grid-item-big {
+      width: 100%; } }
+  @media screen and (min-width: 40em) {
+    .grid-items .grid-item-big p {
+      max-width: 60%; } }
+  .grid-items .grid-item-image {
+    background: url("https:\a//raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png");
+    background-color: #6b83a6;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover; }
 
 h1.page-title {
+  font-family: 'impacted';
   font-size: 7em;
   margin-top: 0.2em;
   text-decoration: underline; }
 
 .row.testimonial {
   text-align: left; }
-
-.container.blog {
-  text-align: left;
-  margin: 2em; }
-  .container.blog .row {
-    font-size: 18px;
-    font-family: 'Open Sans'; }
-    .container.blog .row img {
-      border: 1px solid black;
-      margin: 1em;
-      max-width: 75%;
-      height: auto; }
-    .container.blog .row .blog-section {
-      font-family: 'Open Sans';
-      margin-top: 3em;
-      font-weight: normal; }
-      .container.blog .row .blog-section .blog-section-header {
-        font-family: 'Open Sans';
-        font-size: 32px;
-        text-decoration: underline;
-        margin-bottom: 0.5em; }
-      .container.blog .row .blog-section .blog-subsection-header {
-        font-family: 'Open Sans';
-        font-size: 24px;
-        text-decoration: underline;
-        margin-top: 1em;
-        margin-bottom: 0.5em; }
-      .container.blog .row .blog-section ul li {
-        font-family: 'Open Sans'; }
-        .container.blog .row .blog-section ul li b {
-          font-family: 'Open Sans'; }

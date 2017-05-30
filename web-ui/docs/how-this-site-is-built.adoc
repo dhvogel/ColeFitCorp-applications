@@ -1,0 +1,101 @@
+:stylesheet: styles/asciidoc.css
+
+++++
+
+<title>CF Corp.</title>
+<link rel="stylesheet" href="../styles/main.css" type="text/css">
+<script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/_navbar.js"></script>
+
+<header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="../" class="logo">
+      <img src="assets/images/lifting-barbell.png" alt="Logo Image">
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        <li class="nav-link"><a href="pricing">Pricing</a></li>
+        <li class="nav-link"><a href="testimonials">Testimonials</a></li>
+        <li class="nav-link"><a href="workouts">Workouts</a></li>
+        <li class="nav-link"><a href="javascript:void(0)">How this site is built</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+++++
+
+== How this site is built
+
+Some visitors to ColeFitCorp.com may be interested in how this site has
+been built. On this page I aim to explain how the site works in addition
+to some key processes I followed when developing it.
+
+Dan
+
+---
+=== System Architecture
+
+On a high level, the Cole Fit Corp web application runs on several
+servers owned and operated by Amazon Web Services (AWS for short).
+
+This website can be broken up into three logical components. They
+are:
+
+- **The User Interface.** This is the component you are looking
+  at right now. It supplies the static content of the site. Static
+  content can be thought of as content that doesn't change -- it
+  is the same for every user who visits the site and does not have
+  to be computed in the background.
+- **The Workout Service.** This component operates
+  the colefitcorp.com/workouts page behind the scenes.
+  It is currently responsible for receiving submitted workouts and responding
+  to requests for these submitted workouts. However, this functionality
+  could be extended if I have the time and will to do so.
+- **The Database.** This components is where the submitted workouts are
+  stored. As it is currently the sole source of truth for the list
+  of workouts, it is imperative that the database be highly available and reliable.
+
+I have created a series of diagrams that aim to explain the interplay
+of the three ColeFit Corp web application components.
+
+==== Diagram 1 - The Three Components
+
+image::https://github.com/dhvogel/ColeFitCorp-applications/raw/master/web-ui/src/public/assets/images/cfcorp_architecture-1.png[width=75%]
+
+You'll see that the ColeFitCorp Web UI and the ColeFitCorp Workout
+Service live in something called Docker Containers.
+
+What is a Docker Container? On a high level, a Docker Container is a tool that simplifies
+the application development and deployment processes. In specific, Docker Containers
+do the following for me:
+
+- **Isolate processes that are running on the same server.** This
+  enables the cfcorp-web-ui and cfcorp-workout-service to just worry
+  about "themselves" as opposed to worrying about "themselves and
+  everything else on the server".
+- **Standardize the environment where each application is run.**
+  Environment standardization allows me to have confidence that whatever
+  I built on my own computer (also called my "local") will run as
+  intended on any other computer. When I build an application on
+  my local, I am building it using my local's operating environment.
+  When I have finished building and am ready to ship my product
+  to a server, I am basically sending the code that I developed on my local
+  to a computer somewhere in the cloud. Without a containerization
+  service such as Docker, there can be no promises made about how
+  the application will run on a different computer. However, if I put my application
+  in a Docker Container, it will run as intended in any environment that
+  can run the Docker Container. This guarantee saves me a lot of
+  headaches. Especially when I have a product finished on my local
+  and am eager to see it run in production!
+
+I am being intentionally vague about this "Database-as-a-service" shown
+in the diagram above. For now, it can be thought of as a "reliable, available place
+to store the application data". I'll explain it in more detail in subsequent diagrams.
+
+==== Diagram 2 - Call flow
+
+image::https://github.com/dhvogel/ColeFitCorp-applications/raw/master/web-ui/src/public/assets/images/cfcorp_architecture-2.png[width=75%]
