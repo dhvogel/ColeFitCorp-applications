@@ -55,7 +55,7 @@ are:
   It is currently responsible for receiving submitted workouts and responding
   to requests for these submitted workouts. However, this functionality
   could be extended if I have the time and will to do so.
-- **The Database.** This components is where the submitted workouts are
+- **The Database.** This component is where the submitted workouts are
   stored. As it is currently the sole source of truth for the list
   of workouts, it is imperative that the database be highly available and reliable.
 
@@ -66,12 +66,18 @@ of the three ColeFit Corp web application components.
 
 image::https://github.com/dhvogel/ColeFitCorp-applications/raw/master/web-ui/src/public/assets/images/cfcorp_architecture-1.png[width=75%]
 
-You'll see that the ColeFitCorp Web UI and the ColeFitCorp Workout
-Service live in something called Docker Containers.
+In this diagram, we have two applications (the blue boxes) running on a server
+owned by Amazon (the orange box).
 
-What is a Docker Container? On a high level, a Docker Container is a tool that simplifies
-the application development and deployment processes. In specific, Docker Containers
-do the following for me:
+I am calling the two applications "CFCorp-web-ui" and "CFCorp-workout-service". Aptly
+named as they are, they correspond to the "User Interface" and "Workout Service"
+mentioned above.
+
+Astute readers will notice that these two applications live in something called "Docker
+Containers". What is a Docker Container? On a high level, a Docker Container is a tool that simplifies
+the application development and deployment processes. It makes it easier for me to build
+applications that will run on any server. In specific, Docker Containers do the
+following for me:
 
 - **Isolate processes that are running on the same server.** This
   enables the cfcorp-web-ui and cfcorp-workout-service to just worry
@@ -99,3 +105,60 @@ to store the application data". I'll explain it in more detail in subsequent dia
 ==== Diagram 2 - Call flow
 
 image::https://github.com/dhvogel/ColeFitCorp-applications/raw/master/web-ui/src/public/assets/images/cfcorp_architecture-2.png[width=75%]
+
+This diagram shows how the three components interact with each other. You'll see
+both the server and Docker Containers now have ports defined. Ports are what
+machines use to talk to each other over the internet.
+
+Why did I choose to expose port 80 on the server? Because port 80 is the __default HTTP port__.
+When you make an HTTP request to a server without specifying a port, your request will
+automatically get forwarded to port 80 on that server. So, when you say "I want to
+go to http://colefitcorp.com ", what you are really saying is "I want to go to
+http://colefitcorp.com:80 ". Why is 80 the default port? Pretty interesting story.
+You can read about it https://superuser.com/a/996843[here].
+
+When a request comes in to port 80 on the server, it gets forwarded to port 3000
+on the CFCorp-web-ui container, where the application is listening.
+This relationship is called a __port mapping__.
+An additional port mapping is defined between the server port 9000 and the
+CFCorp-workout-service container port 9000. So, when CFCorp-web-ui needs to talk
+to CFCorp-workout-service, it just makes a call out to the same server that it
+sits on, just at a different port.
+
+---
+
+**Question for the audience:** Why might this call be a problem for me when I need to ship
+my application from my local to a production server?
+
+First, let's think about the call we are making. Since CFCorp-workout-service always
+runs on port 9000, the general format of this call is link:++http://<hostname that is running CFCorp-workout-service>:9000++[]
+
+OK, easy enough. Let's make this call when we are developing locally. Since our
+local hostname is "localhost", our call to the CFCorp-workout-service
+is a simple as calling http://localhost:9000. We spin up CFCorp-web-ui at
+http://localhost:3000 and have it call CFCorp-workout-service at http://localhost:9000.
+And it works! Let's ship it!
+
+So we ship it. And lo and behold, when we visit http://colefitcorp.com/workouts,
+we can't connect to http://localhost:9000. Huh? Weren't we just able to do that?
+
+What we (the royal we) did not realize is that we are making the call to http://localhost:9000
+from the __client side__ even when the site is hosted on a __production server__.
+Basically, our local is still trying to reach __our local's__ "localhost" and not
+__the server's__ "localhost".
+
+How can we fix this? Well, we could explicitly specify the server's hostname every time
+we want to make the call. So instead of calling http://localhost:9000, we call
+http://<server-ip>:9000. Sounds easy enough.
+
+**Another question for the audience:** How do we know our server's IP Address when
+we are developing the application?
+
+Answer: we don't. :(
+
+Unfortunately, in a production environment, we will have to bake in some mechanism
+for the application to discover the IP address of the server upon which it lives at runtime.
+Using this newly discovered IP, we can be sure we are hitting http://<the-server>:9000
+and not http://<our-local>:9000. And that is exactly what I did.
+
+---
