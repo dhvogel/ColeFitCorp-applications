@@ -62,6 +62,8 @@ are:
 I have created a series of diagrams that aim to explain the interplay
 of the three ColeFit Corp web application components.
 
+---
+
 ==== Diagram 1 - The Three Components
 
 image::https://github.com/dhvogel/ColeFitCorp-applications/raw/master/web-ui/src/public/assets/images/cfcorp_architecture-1.png[width=75%]
@@ -102,6 +104,8 @@ I am being intentionally vague about this "Database-as-a-service" shown
 in the diagram above. For now, it can be thought of as a "reliable, available place
 to store the application data". I'll explain it in more detail in subsequent diagrams.
 
+---
+
 ==== Diagram 2 - Call flow
 
 image::https://github.com/dhvogel/ColeFitCorp-applications/raw/master/web-ui/src/public/assets/images/cfcorp_architecture-2.png[width=75%]
@@ -117,7 +121,7 @@ go to http://colefitcorp.com ", what you are really saying is "I want to go to
 http://colefitcorp.com:80 ". Why is 80 the default port? Pretty interesting story.
 You can read about it https://superuser.com/a/996843[here].
 
-When a request comes in to port 80 on the server, it gets forwarded to port 3000
+When a request comes in to port 80 on my server, it gets forwarded to port 3000
 on the CFCorp-web-ui container, where the application is listening.
 This relationship is called a __port mapping__.
 An additional port mapping is defined between the server port 9000 and the
@@ -125,40 +129,45 @@ CFCorp-workout-service container port 9000. So, when CFCorp-web-ui needs to talk
 to CFCorp-workout-service, it just makes a call out to the same server that it
 sits on, just at a different port.
 
----
-
-**Question for the audience:** Why might this call be a problem for me when I need to ship
-my application from my local to a production server?
-
-First, let's think about the call we are making. Since CFCorp-workout-service always
-runs on port 9000, the general format of this call is link:++http://<hostname that is running CFCorp-workout-service>:9000++[]
-
-OK, easy enough. Let's make this call when we are developing locally. Since our
-local hostname is "localhost", our call to the CFCorp-workout-service
-is a simple as calling http://localhost:9000. We spin up CFCorp-web-ui at
-http://localhost:3000 and have it call CFCorp-workout-service at http://localhost:9000.
+OK, easy enough. In order to get this call to work, all I need to do is make a call
+to http://<hostname>:9000. When I develop locally, I spin up the CFCorp-web-ui and
+CFCorp-workout-service containers on my local host, which is aptly named "localhost".
+My call to the CFCorp-workout-service is a simple as calling http://localhost:9000.
 And it works! Let's ship it!
 
-So we ship it. And lo and behold, when we visit http://colefitcorp.com/workouts,
-we can't connect to http://localhost:9000. Huh? Weren't we just able to do that?
+So I ship it. And lo and behold, when I visit http://colefitcorp.com/workouts,
+the site tells me that it can't connect to
+http://localhost:9000. Huh? Wasn't I just able to do that?
 
-What we (the royal we) did not realize is that we are making the call to http://localhost:9000
-from the __client side__ even when the site is hosted on a __production server__.
-Basically, our local is still trying to reach __our local's__ "localhost" and not
-__the server's__ "localhost".
+The piece that I was missing is that while I was hitting the production server
+when I visited the site, the code was still being executed on the __client__ side.
+When I visited http://colefitcorp.com, in the background, my local requested the
+site content from the server and displayed it to me. So when I tried to call
+http://localhost:9000, it was my local making that call, **not** the server. Of
+course, I had nothing running at my local's http://localhost:9000 at the time, so
+the call failed. (Except sometimes I did leave my local service up in the background,
+which really through me for a loop as my calls sometimes succeeded and sometimes
+failed).
 
-How can we fix this? Well, we could explicitly specify the server's hostname every time
-we want to make the call. So instead of calling http://localhost:9000, we call
+How could I fix this? Well, instead of calling localhost, I could explicitly call
+the server's IP address. So instead of calling http://localhost:9000, I could call
 http://<server-ip>:9000. Sounds easy enough.
 
-**Another question for the audience:** How do we know our server's IP Address when
-we are developing the application?
+**Question for the audience:** How can I know my eventual production server's
+IP Address when I am developing the application?
 
-Answer: we don't. :(
+Answer: I can't. Sad!
 
-Unfortunately, in a production environment, we will have to bake in some mechanism
-for the application to discover the IP address of the server upon which it lives at runtime.
-Using this newly discovered IP, we can be sure we are hitting http://<the-server>:9000
-and not http://<our-local>:9000. And that is exactly what I did.
+When I ask AWS to spin up a server for me to use in production, I am letting them
+choose which one of their seemingly-infinite amount of servers they want to spin
+up for me. This means that I can't possibly predict the eventual server's IP.
+Yes, it is possible to rent a specific server from Amazon but that's more
+expensive and I ain't made of money.
+
+In a production environment, I will have to bake in some mechanism
+for the application to discover the IP address of the server upon which it lives
+at runtime. Using this newly discovered IP, I can be sure the CFCorp-web-ui is hitting
+http://<the-server>:9000 and not http://<our-local>:9000. (In a local environment
+I can keep it as http://localhost:9000). Problem solved!
 
 ---
