@@ -467,9 +467,28 @@ are:</p>
 <ol class="arabic">
 <li>
 <p><strong>The User Interface.</strong> This is the component you are looking
-at right now. It supplies the content of the site.
-&#160;<br>
-The site has two different kinds of content: <strong>static content</strong> and <strong>dynamic content</strong>.</p>
+at right now. It supplies the static content of the site and a UI template for
+dynamic content.</p>
+</li>
+<li>
+<p><strong>The Workout Service.</strong> This component supplies the dynamic functionality for
+the colefitcorp.com/workouts page. It is responsible for receiving submitted
+workouts and responding to requests for these submitted workouts.</p>
+</li>
+<li>
+<p><strong>The Database.</strong> This component is where the submitted workouts are
+stored.</p>
+</li>
+</ol>
+</div>
+<div class="sect4">
+<h5 id="_static_vs_dynamic_content">Static vs Dynamic Content</h5>
+<div class="paragraph">
+<p>Above, I mentioned both static and dynamic content. I&#8217;ll explain that in more detail.</p>
+</div>
+<div class="paragraph">
+<p>The site has two different kinds of content: <strong>static content</strong> and <strong>dynamic content</strong>.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -509,23 +528,12 @@ content of this page changes throughout time as workouts are continually added.<
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><strong>The Workout Service.</strong> This component supplies the dynamic functionality for
-the colefitcorp.com/workouts page. It is responsible for receiving submitted
-workouts and responding to requests for these submitted workouts.</p>
-</li>
-<li>
-<p><strong>The Database.</strong> This component is where the submitted workouts are
-stored.</p>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>I have created a series of diagrams that aim to explain the interplay
 of the three ColeFit Corp web application components.</p>
 </div>
 <hr>
+</div>
 <div class="sect3">
 <h4 id="_diagram_1_the_three_components">Diagram 1 - The Three Components</h4>
 <div class="imageblock">
@@ -540,6 +548,8 @@ of the three ColeFit Corp web application components.</p>
 <p>The "User Interface" and "Workout Service" both run in Docker containers on the same
 EC2 instance. These containers are aptly named "cfcorp-web-ui" and "cfcorp-workout-service".</p>
 </div>
+<div class="sect4">
+<h5 id="_the_wonders_of_docker">The wonders of Docker</h5>
 <div class="paragraph">
 <p>Docker is a tool that greatly simplifies my application development
 and deployment processes. It makes it easier for me to build applications that
@@ -582,6 +592,7 @@ to store the application data". I&#8217;ll explain it in more detail in subseque
 </div>
 <hr>
 </div>
+</div>
 <div class="sect3">
 <h4 id="_diagram_2_call_flow">Diagram 2 - Call flow</h4>
 <div class="imageblock">
@@ -611,12 +622,8 @@ CFCorp-workout-service container port 9000. So, when CFCorp-web-ui needs to talk
 to CFCorp-workout-service, it can make a call out to the same server that it
 sits on, just at a different port.</p>
 </div>
-<div class="paragraph">
-<p>&#160;<br></p>
-</div>
-<div class="paragraph">
-<p><span class="underline"><strong>A story about service discovery</strong></span></p>
-</div>
+<div class="sect4">
+<h5 id="_a_story_about_service_discovery">A story about service discovery</h5>
 <div class="paragraph">
 <p>OK, easy enough. In order to get this call to work, all I need to do is make a call
 to <a href="http://&lt;hostname&gt;:9000" class="bare">http://&lt;hostname&gt;:9000</a>. When I develop locally, I spin up the CFCorp-web-ui and
@@ -670,9 +677,10 @@ in this system is harder than might first appear.</p>
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-07-16 18:46:42 PDT
+Last updated 2017-07-16 19:33:35 PDT
 </div>
 </div>
 </body>

@@ -43,28 +43,33 @@ This website can be broken up into three logical components. They
 are:
 
 1. **The User Interface.** This is the component you are looking
-  at right now. It supplies the content of the site.
-  {nbsp} +
-  The site has two different kinds of content: **static content** and **dynamic content**.
-  ** **Static content** can be thought of as content that is the same for all users,
-  all the time -- it does not have to be fetched or computed in the background.
-  Static content is hardcoded into the UI.
-  The following pages are completely static:
-    *** colefitcorp.com
-    *** colefitcorp.com/pricing
-    *** colefitcorp.com/testimonials
-    *** colefitcorp.com/blog (this page)
-  ** **Dynamic content** changes between users or throughout time. It cannot be
-  hardcoded into the UI. Instead, I have created a UI template for dynamic
-  content which formats the dynamic data upon fetching it.
-    *** The only dynamically generated page is colefitcorp.com/workouts. The
-    content of this page changes throughout time as workouts are continually added.
-
+  at right now. It supplies the static content of the site and a UI template for
+  dynamic content.
 2. **The Workout Service.** This component supplies the dynamic functionality for
   the colefitcorp.com/workouts page. It is responsible for receiving submitted
   workouts and responding to requests for these submitted workouts.
 3. **The Database.** This component is where the submitted workouts are
   stored.
+
+===== Static vs Dynamic Content
+Above, I mentioned both static and dynamic content. I'll explain that in more detail.
+
+The site has two different kinds of content: **static content** and **dynamic content**.
+
+** **Static content** can be thought of as content that is the same for all users,
+all the time -- it does not have to be fetched or computed in the background.
+Static content is hardcoded into the UI.
+The following pages are completely static:
+  *** colefitcorp.com
+  *** colefitcorp.com/pricing
+  *** colefitcorp.com/testimonials
+  *** colefitcorp.com/blog (this page)
+** **Dynamic content** changes between users or throughout time. It cannot be
+hardcoded into the UI. Instead, I have created a UI template for dynamic
+content which formats the dynamic data upon fetching it.
+  *** The only dynamically generated page is colefitcorp.com/workouts. The
+  content of this page changes throughout time as workouts are continually added.
+
 
 I have created a series of diagrams that aim to explain the interplay
 of the three ColeFit Corp web application components.
@@ -79,6 +84,8 @@ Nothing crazy in this diagram. Above are the three components as described.
 
 The "User Interface" and "Workout Service" both run in Docker containers on the same
 EC2 instance. These containers are aptly named "cfcorp-web-ui" and "cfcorp-workout-service".
+
+===== The wonders of Docker
 
 Docker is a tool that greatly simplifies my application development
 and deployment processes. It makes it easier for me to build applications that
@@ -136,7 +143,7 @@ CFCorp-workout-service container port 9000. So, when CFCorp-web-ui needs to talk
 to CFCorp-workout-service, it can make a call out to the same server that it
 sits on, just at a different port.
 
-[underline]#**A story about service discovery**#
+===== A story about service discovery
 
 OK, easy enough. In order to get this call to work, all I need to do is make a call
 to http://<hostname>:9000. When I develop locally, I spin up the CFCorp-web-ui and
