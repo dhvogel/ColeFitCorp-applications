@@ -18,3 +18,9 @@ Go to **localhost:<whatever port site was bound to>** to see the site.
 
 Go to **localhost:3000** to see the site
 
+
+== Production build
+
+Usage:
+
+  $ docker build -t dhvogel/cfcorp-site:<v> -f production/Dockerfile .
