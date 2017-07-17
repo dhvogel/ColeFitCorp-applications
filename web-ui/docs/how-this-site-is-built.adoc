@@ -32,32 +32,39 @@
 
 Some visitors to ColeFitCorp.com may be interested in how this site has
 been built. On this page I aim to explain how the site works in addition
-to some key processes I followed when developing it.
+to some processes I followed when developing it.
 
 Dan
 
 ---
 === System Architecture
 
-On a high level, the Cole Fit Corp web application runs on several
-servers owned and operated by Amazon Web Services (AWS for short).
-
 This website can be broken up into three logical components. They
 are:
 
-- **The User Interface.** This is the component you are looking
-  at right now. It supplies the static content of the site. Static
-  content can be thought of as content that doesn't change -- it
-  is the same for every user who visits the site and does not have
-  to be computed in the background.
-- **The Workout Service.** This component operates
-  the colefitcorp.com/workouts page behind the scenes.
-  It is currently responsible for receiving submitted workouts and responding
-  to requests for these submitted workouts. However, this functionality
-  could be extended if I have the time and will to do so.
-- **The Database.** This component is where the submitted workouts are
-  stored. As it is currently the sole source of truth for the list
-  of workouts, it is imperative that the database be highly available and reliable.
+1. **The User Interface.** This is the component you are looking
+  at right now. It supplies the content of the site.
+  {nbsp} +
+  The site has two different kinds of content: **static content** and **dynamic content**.
+  ** **Static content** can be thought of as content that is the same for all users,
+  all the time -- it does not have to be fetched or computed in the background.
+  Static content is hardcoded into the UI.
+  The following pages are completely static:
+    *** colefitcorp.com
+    *** colefitcorp.com/pricing
+    *** colefitcorp.com/testimonials
+    *** colefitcorp.com/blog (this page)
+  ** **Dynamic content** changes between users or throughout time. It cannot be
+  hardcoded into the UI. Instead, I have created a UI template for dynamic
+  content which formats the dynamic data upon fetching it.
+    *** The only dynamically generated page is colefitcorp.com/workouts. The
+    content of this page changes throughout time as workouts are continually added.
+
+2. **The Workout Service.** This component supplies the dynamic functionality for
+  the colefitcorp.com/workouts page. It is responsible for receiving submitted
+  workouts and responding to requests for these submitted workouts.
+3. **The Database.** This component is where the submitted workouts are
+  stored.
 
 I have created a series of diagrams that aim to explain the interplay
 of the three ColeFit Corp web application components.
@@ -68,37 +75,37 @@ of the three ColeFit Corp web application components.
 
 image::https://github.com/dhvogel/ColeFitCorp-applications/raw/master/web-ui/src/public/assets/images/cfcorp_architecture-1.png[width=75%]
 
-In this diagram, we have two applications (the blue boxes) running on a server
-owned by Amazon (the orange box).
+Nothing crazy in this diagram. Above are the three components as described.
 
-I am calling the two applications "CFCorp-web-ui" and "CFCorp-workout-service". Aptly
-named as they are, they correspond to the "User Interface" and "Workout Service"
-mentioned above.
+The "User Interface" and "Workout Service" both run in Docker containers on the same
+EC2 instance. These containers are aptly named "cfcorp-web-ui" and "cfcorp-workout-service".
 
-Astute readers will notice that these two applications live in something called "Docker
-Containers". What is a Docker Container? On a high level, a Docker Container is a tool that simplifies
-the application development and deployment processes. It makes it easier for me to build
-applications that will run on any server. In specific, Docker Containers do the
+Docker is a tool that greatly simplifies my application development
+and deployment processes. It makes it easier for me to build applications that
+will run on any server. In specific, Docker does the
 following for me:
 
-- **Isolate processes that are running on the same server.** This
+- **Isolates processes that are running on the same server.** This
   enables the cfcorp-web-ui and cfcorp-workout-service to just worry
   about "themselves" as opposed to worrying about "themselves and
-  everything else on the server".
-- **Standardize the environment where each application is run.**
-  Environment standardization allows me to have confidence that whatever
-  I built on my own computer (also called my "local") will run as
-  intended on any other computer. When I build an application on
-  my local, I am building it using my local's operating environment.
-  When I have finished building and am ready to ship my product
-  to a server, I am basically sending the code that I developed on my local
-  to a computer somewhere in the cloud. Without a containerization
-  service such as Docker, there can be no promises made about how
-  the application will run on a different computer. However, if I put my application
-  in a Docker Container, it will run as intended in any environment that
-  can run the Docker Container. This guarantee saves me a lot of
-  headaches. Especially when I have a product finished on my local
-  and am eager to see it run in production!
+  everything else on the server". Docker protects each application from
+  its surroundings -- all the other junk going on in the server unrelated
+  to the application itself.
+- **Standardizes the environment where each application is run.**
+  Docker's environment standardization allows me to have confidence that my applications
+  will run as intended on any machine that can run Docker. When I build an
+  application on my local, I am building it using my local's operating environment.
+  Without a containerization service such as Docker, there can be no promises made
+  about how the locally built application will run in a different environment.
+  What if the application has a dependency on a local package?
+  What if it needs a configuration file that only exists on my local?
+  Local Libraries? Local System tools? The list goes on and on.
+  Docker containers wrap a piece of software in a complete filesystem that contains
+  everything the software needs to run. No dependencies on the world outside of
+  the container. This means that the Dockerized software can run as intended
+  in any environment that can run Docker -- no assembly required! This guarantee
+  saves me a lot of headaches. Especially when I have a product finished on my local
+  and am eager to see it run in production.
 
 I am being intentionally vague about this "Database-as-a-service" shown
 in the diagram above. For now, it can be thought of as a "reliable, available place
@@ -123,40 +130,39 @@ You can read about it https://superuser.com/a/996843[here].
 
 When a request comes in to port 80 on my server, it gets forwarded to port 3000
 on the CFCorp-web-ui container, where the application is listening.
-This relationship is called a __port mapping__.
+This relationship is called a **port mapping**.
 An additional port mapping is defined between the server port 9000 and the
 CFCorp-workout-service container port 9000. So, when CFCorp-web-ui needs to talk
-to CFCorp-workout-service, it just makes a call out to the same server that it
+to CFCorp-workout-service, it can make a call out to the same server that it
 sits on, just at a different port.
+
+[underline]#**A story about service discovery**#
 
 OK, easy enough. In order to get this call to work, all I need to do is make a call
 to http://<hostname>:9000. When I develop locally, I spin up the CFCorp-web-ui and
-CFCorp-workout-service containers on my local host, which is aptly named "localhost".
-My call to the CFCorp-workout-service is a simple as calling http://localhost:9000.
-And it works! Let's ship it!
+CFCorp-workout-service containers on localhost. My call to the CFCorp-workout-service
+is a simple as calling http://localhost:9000. And voila, it works! Let's ship it!
 
 So I ship it. And lo and behold, when I visit http://colefitcorp.com/workouts,
 the site tells me that it can't connect to
 http://localhost:9000. Huh? Wasn't I just able to do that?
 
 The piece that I was missing is that while I was hitting the production server
-when I visited the site, the code was still being executed on the __client__ side.
-When I visited http://colefitcorp.com, in the background, my local requested the
-site content from the server and displayed it to me. So when I tried to call
-http://localhost:9000, it was my local making that call, **not** the server. Of
-course, I had nothing running at my local's http://localhost:9000 at the time, so
+when I visited the site, the site code was still being executed on the __client__ side.
+So when I tried to call http://localhost:9000, it was my **local** making that call,
+not the server. Of course, I had nothing running at my local's http://localhost:9000 at the time, so
 the call failed. (Except sometimes I did leave my local service up in the background,
 which really through me for a loop as my calls sometimes succeeded and sometimes
-failed).
+failed. Drove me pretty nuts for a while).
 
-How could I fix this? Well, instead of calling localhost, I could explicitly call
-the server's IP address. So instead of calling http://localhost:9000, I could call
-http://<server-ip>:9000. Sounds easy enough.
+How could I fix this? Well, one solution is instead of calling localhost, I could
+explicitly call the server's IP address. So instead of calling http://localhost:9000,
+I could call http://<server-ip>:9000. Sounds easy enough.
 
 **Question for the audience:** How can I know my eventual production server's
 IP Address when I am developing the application?
 
-Answer: I can't. Sad!
+**Answer:** I can't. Sad!
 
 When I ask AWS to spin up a server for me to use in production, I am letting them
 choose which one of their seemingly-infinite amount of servers they want to spin
@@ -164,10 +170,11 @@ up for me. This means that I can't possibly predict the eventual server's IP.
 Yes, it is possible to rent a specific server from Amazon but that's more
 expensive and I ain't made of money.
 
-In a production environment, I will have to bake in some mechanism
-for the application to discover the IP address of the server upon which it lives
-at runtime. Using this newly discovered IP, I can be sure the CFCorp-web-ui is hitting
-http://<the-server>:9000 and not http://<our-local>:9000. (In a local environment
-I can keep it as http://localhost:9000). Problem solved!
+This problem of "how do I know where to contact the cfcorp-workout-service without
+hardcoding in the IP of the server" is actually a pretty big one that people have thought
+a lot about. It is a field generally called **service discovery** and there are several
+tools available that can do exactly what I need. I won't go into the details of these
+tools -- I just wanted to call out the fact that keeping track of the services
+in this system is harder than might first appear.
 
 ---

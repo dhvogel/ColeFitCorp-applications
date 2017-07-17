@@ -77,7 +77,7 @@ a:hover,a:focus{color:#1d4b8f}
 a img{border:none}
 p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
 p aside{font-size:.875em;line-height:1.35;font-style:italic}
-h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#000;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
 h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
 h1{font-size:2.125em}
 h2{font-size:1.6875em}
@@ -451,7 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Some visitors to ColeFitCorp.com may be interested in how this site has
 been built. On this page I aim to explain how the site works in addition
-to some key processes I followed when developing it.</p>
+to some processes I followed when developing it.</p>
 </div>
 <div class="paragraph">
 <p>Dan</p>
@@ -460,35 +460,66 @@ to some key processes I followed when developing it.</p>
 <div class="sect2">
 <h3 id="_system_architecture">System Architecture</h3>
 <div class="paragraph">
-<p>On a high level, the Cole Fit Corp web application runs on several
-servers owned and operated by Amazon Web Services (AWS for short).</p>
-</div>
-<div class="paragraph">
 <p>This website can be broken up into three logical components. They
 are:</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>The User Interface.</strong> This is the component you are looking
+at right now. It supplies the content of the site.
+&#160;<br>
+The site has two different kinds of content: <strong>static content</strong> and <strong>dynamic content</strong>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>The User Interface.</strong> This is the component you are looking
-at right now. It supplies the static content of the site. Static
-content can be thought of as content that doesn&#8217;t change&#8201;&#8212;&#8201;it
-is the same for every user who visits the site and does not have
-to be computed in the background.</p>
+<p><strong>Static content</strong> can be thought of as content that is the same for all users,
+all the time&#8201;&#8212;&#8201;it does not have to be fetched or computed in the background.
+Static content is hardcoded into the UI.
+The following pages are completely static:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>colefitcorp.com</p>
 </li>
 <li>
-<p><strong>The Workout Service.</strong> This component operates
-the colefitcorp.com/workouts page behind the scenes.
-It is currently responsible for receiving submitted workouts and responding
-to requests for these submitted workouts. However, this functionality
-could be extended if I have the time and will to do so.</p>
+<p>colefitcorp.com/pricing</p>
+</li>
+<li>
+<p>colefitcorp.com/testimonials</p>
+</li>
+<li>
+<p>colefitcorp.com/blog (this page)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Dynamic content</strong> changes between users or throughout time. It cannot be
+hardcoded into the UI. Instead, I have created a UI template for dynamic
+content which formats the dynamic data upon fetching it.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The only dynamically generated page is colefitcorp.com/workouts. The
+content of this page changes throughout time as workouts are continually added.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>The Workout Service.</strong> This component supplies the dynamic functionality for
+the colefitcorp.com/workouts page. It is responsible for receiving submitted
+workouts and responding to requests for these submitted workouts.</p>
 </li>
 <li>
 <p><strong>The Database.</strong> This component is where the submitted workouts are
-stored. As it is currently the sole source of truth for the list
-of workouts, it is imperative that the database be highly available and reliable.</p>
+stored.</p>
 </li>
-</ul>
+</ol>
 </div>
 <div class="paragraph">
 <p>I have created a series of diagrams that aim to explain the interplay
@@ -503,44 +534,44 @@ of the three ColeFit Corp web application components.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In this diagram, we have two applications (the blue boxes) running on a server
-owned by Amazon (the orange box).</p>
+<p>Nothing crazy in this diagram. Above are the three components as described.</p>
 </div>
 <div class="paragraph">
-<p>I am calling the two applications "CFCorp-web-ui" and "CFCorp-workout-service". Aptly
-named as they are, they correspond to the "User Interface" and "Workout Service"
-mentioned above.</p>
+<p>The "User Interface" and "Workout Service" both run in Docker containers on the same
+EC2 instance. These containers are aptly named "cfcorp-web-ui" and "cfcorp-workout-service".</p>
 </div>
 <div class="paragraph">
-<p>Astute readers will notice that these two applications live in something called "Docker
-Containers". What is a Docker Container? On a high level, a Docker Container is a tool that simplifies
-the application development and deployment processes. It makes it easier for me to build
-applications that will run on any server. In specific, Docker Containers do the
+<p>Docker is a tool that greatly simplifies my application development
+and deployment processes. It makes it easier for me to build applications that
+will run on any server. In specific, Docker does the
 following for me:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Isolate processes that are running on the same server.</strong> This
+<p><strong>Isolates processes that are running on the same server.</strong> This
 enables the cfcorp-web-ui and cfcorp-workout-service to just worry
 about "themselves" as opposed to worrying about "themselves and
-everything else on the server".</p>
+everything else on the server". Docker protects each application from
+its surroundings&#8201;&#8212;&#8201;all the other junk going on in the server unrelated
+to the application itself.</p>
 </li>
 <li>
-<p><strong>Standardize the environment where each application is run.</strong>
-Environment standardization allows me to have confidence that whatever
-I built on my own computer (also called my "local") will run as
-intended on any other computer. When I build an application on
-my local, I am building it using my local&#8217;s operating environment.
-When I have finished building and am ready to ship my product
-to a server, I am basically sending the code that I developed on my local
-to a computer somewhere in the cloud. Without a containerization
-service such as Docker, there can be no promises made about how
-the application will run on a different computer. However, if I put my application
-in a Docker Container, it will run as intended in any environment that
-can run the Docker Container. This guarantee saves me a lot of
-headaches. Especially when I have a product finished on my local
-and am eager to see it run in production!</p>
+<p><strong>Standardizes the environment where each application is run.</strong>
+Docker&#8217;s environment standardization allows me to have confidence that my applications
+will run as intended on any machine that can run Docker. When I build an
+application on my local, I am building it using my local&#8217;s operating environment.
+Without a containerization service such as Docker, there can be no promises made
+about how the locally built application will run in a different environment.
+What if the application has a dependency on a local package?
+What if it needs a configuration file that only exists on my local?
+Local Libraries? Local System tools? The list goes on and on.
+Docker containers wrap a piece of software in a complete filesystem that contains
+everything the software needs to run. No dependencies on the world outside of
+the container. This means that the Dockerized software can run as intended
+in any environment that can run Docker&#8201;&#8212;&#8201;no assembly required! This guarantee
+saves me a lot of headaches. Especially when I have a product finished on my local
+and am eager to see it run in production.</p>
 </li>
 </ul>
 </div>
@@ -574,18 +605,23 @@ You can read about it <a href="https://superuser.com/a/996843">here</a>.</p>
 <div class="paragraph">
 <p>When a request comes in to port 80 on my server, it gets forwarded to port 3000
 on the CFCorp-web-ui container, where the application is listening.
-This relationship is called a <em>port mapping</em>.
+This relationship is called a <strong>port mapping</strong>.
 An additional port mapping is defined between the server port 9000 and the
 CFCorp-workout-service container port 9000. So, when CFCorp-web-ui needs to talk
-to CFCorp-workout-service, it just makes a call out to the same server that it
+to CFCorp-workout-service, it can make a call out to the same server that it
 sits on, just at a different port.</p>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p><span class="underline"><strong>A story about service discovery</strong></span></p>
 </div>
 <div class="paragraph">
 <p>OK, easy enough. In order to get this call to work, all I need to do is make a call
 to <a href="http://&lt;hostname&gt;:9000" class="bare">http://&lt;hostname&gt;:9000</a>. When I develop locally, I spin up the CFCorp-web-ui and
-CFCorp-workout-service containers on my local host, which is aptly named "localhost".
-My call to the CFCorp-workout-service is a simple as calling <a href="http://localhost:9000" class="bare">http://localhost:9000</a>.
-And it works! Let&#8217;s ship it!</p>
+CFCorp-workout-service containers on localhost. My call to the CFCorp-workout-service
+is a simple as calling <a href="http://localhost:9000" class="bare">http://localhost:9000</a>. And voila, it works! Let&#8217;s ship it!</p>
 </div>
 <div class="paragraph">
 <p>So I ship it. And lo and behold, when I visit <a href="http://colefitcorp.com/workouts" class="bare">http://colefitcorp.com/workouts</a>,
@@ -594,26 +630,24 @@ the site tells me that it can&#8217;t connect to
 </div>
 <div class="paragraph">
 <p>The piece that I was missing is that while I was hitting the production server
-when I visited the site, the code was still being executed on the <em>client</em> side.
-When I visited <a href="http://colefitcorp.com" class="bare">http://colefitcorp.com</a>, in the background, my local requested the
-site content from the server and displayed it to me. So when I tried to call
-<a href="http://localhost:9000" class="bare">http://localhost:9000</a>, it was my local making that call, <strong>not</strong> the server. Of
-course, I had nothing running at my local&#8217;s <a href="http://localhost:9000" class="bare">http://localhost:9000</a> at the time, so
+when I visited the site, the site code was still being executed on the <em>client</em> side.
+So when I tried to call <a href="http://localhost:9000" class="bare">http://localhost:9000</a>, it was my <strong>local</strong> making that call,
+not the server. Of course, I had nothing running at my local&#8217;s <a href="http://localhost:9000" class="bare">http://localhost:9000</a> at the time, so
 the call failed. (Except sometimes I did leave my local service up in the background,
 which really through me for a loop as my calls sometimes succeeded and sometimes
-failed).</p>
+failed. Drove me pretty nuts for a while).</p>
 </div>
 <div class="paragraph">
-<p>How could I fix this? Well, instead of calling localhost, I could explicitly call
-the server&#8217;s IP address. So instead of calling <a href="http://localhost:9000" class="bare">http://localhost:9000</a>, I could call
-<a href="http://&lt;server-ip&gt;:9000" class="bare">http://&lt;server-ip&gt;:9000</a>. Sounds easy enough.</p>
+<p>How could I fix this? Well, one solution is instead of calling localhost, I could
+explicitly call the server&#8217;s IP address. So instead of calling <a href="http://localhost:9000" class="bare">http://localhost:9000</a>,
+I could call <a href="http://&lt;server-ip&gt;:9000" class="bare">http://&lt;server-ip&gt;:9000</a>. Sounds easy enough.</p>
 </div>
 <div class="paragraph">
 <p><strong>Question for the audience:</strong> How can I know my eventual production server&#8217;s
 IP Address when I am developing the application?</p>
 </div>
 <div class="paragraph">
-<p>Answer: I can&#8217;t. Sad!</p>
+<p><strong>Answer:</strong> I can&#8217;t. Sad!</p>
 </div>
 <div class="paragraph">
 <p>When I ask AWS to spin up a server for me to use in production, I am letting them
@@ -623,11 +657,12 @@ Yes, it is possible to rent a specific server from Amazon but that&#8217;s more
 expensive and I ain&#8217;t made of money.</p>
 </div>
 <div class="paragraph">
-<p>In a production environment, I will have to bake in some mechanism
-for the application to discover the IP address of the server upon which it lives
-at runtime. Using this newly discovered IP, I can be sure the CFCorp-web-ui is hitting
-<a href="http://&lt;the-server&gt;:9000" class="bare">http://&lt;the-server&gt;:9000</a> and not <a href="http://&lt;our-local&gt;:9000" class="bare">http://&lt;our-local&gt;:9000</a>. (In a local environment
-I can keep it as <a href="http://localhost:9000" class="bare">http://localhost:9000</a>). Problem solved!</p>
+<p>This problem of "how do I know where to contact the cfcorp-workout-service without
+hardcoding in the IP of the server" is actually a pretty big one that people have thought
+a lot about. It is a field generally called <strong>service discovery</strong> and there are several
+tools available that can do exactly what I need. I won&#8217;t go into the details of these
+tools&#8201;&#8212;&#8201;I just wanted to call out the fact that keeping track of the services
+in this system is harder than might first appear.</p>
 </div>
 <hr>
 </div>
@@ -637,7 +672,7 @@ I can keep it as <a href="http://localhost:9000" class="bare">http://localhost:9
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-30 17:58:31 PDT
+Last updated 2017-07-16 18:46:42 PDT
 </div>
 </div>
 </body>
